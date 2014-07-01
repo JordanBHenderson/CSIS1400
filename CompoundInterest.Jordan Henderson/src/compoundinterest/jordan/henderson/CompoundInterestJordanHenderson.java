@@ -1,24 +1,34 @@
 package compoundinterest.jordan.henderson;
 
-import java.util.Scanner; // Scanner is in the java.util Package
+import javax.swing.JOptionPane;
+
 public class CompoundInterestJordanHenderson
 {
     
    public static void main(String[] args)
     {
-        Scanner input = new Scanner(System.in);
-        //Prompt the user to enter a Radius
-        System.out.print("1 2 3: ");
-        double number1 = input.nextDouble();
-        double number2 = input.nextDouble ();
-        double number3 = input.nextDouble();
-        
-        //Compute average
-        double average = (number1 + number2 + number3) /3;
-        
-        // Display results
-        System.out.println("The average of" + number1 + "1" + number2 
-        + "2" + number3 + "is" + average);
-    }   
+
+      //Prompt for Deposit Amount and Interest Rate
+      String sMonthlyDepositAmount = JOptionPane.showInputDialog("Please Enter The Amount You\nWill Deposit Each Month");
+      String sAnnualInterestRate = JOptionPane.showInputDialog("Please Enter The Annual Interest Rate.\nExample: type \"5\" for 5% annual interest");
+
+      //Convert the strings to floats
+      float fMonthlyDepositAmount = Float.parseFloat(sMonthlyDepositAmount);
+      float fAnnualInterestRate = Float.parseFloat(sAnnualInterestRate) / 100;
+
+      //Calc monthly APR
+      float monthlyInterestRate = fAnnualInterestRate / 12;
+
+      //Initialize the Total as zero
+      float totalInAccount = (float) 0.00;
+
+      for(int i = 0; i < 6; i++){
+        totalInAccount = (fMonthlyDepositAmount + totalInAccount) * (1 + monthlyInterestRate);
+      }
+
+      //Show the user the total
+      JOptionPane.showMessageDialog(null, "Your total account balance after 6 months is: " + totalInAccount, "Your total account balance after 6 months is: " + totalInAccount, JOptionPane.INFORMATION_MESSAGE);
+      System.out.println("I AM DONE");
+    }
     
 }
